@@ -9,7 +9,7 @@ public interface UserService extends AbstractService<AbstractUser, Long> {
 
     public AbstractUser create(AbstractUser abstractUser) throws AbstractException;
 
-    public AbstractUser update(AbstractUser abstractUser) throws AbstractException;
+    public AbstractUser update(long id , AbstractUser abstractUser) throws AbstractException;
 
     public AbstractUser delete(Long userId) throws AbstractException;
 

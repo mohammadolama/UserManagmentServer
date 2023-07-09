@@ -16,24 +16,43 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/user/{id}")
     public ResponseEntity get(@PathVariable long id){
         try {
             AbstractUser abstractUser = userService.get(id);
             return ResponseEntity.ok(abstractUser);
         } catch (AbstractException e) {
-            e.printStackTrace();
             return ResponseEntity.status(404).body(e.getMessage());
         }
     }
 
-    @PostMapping("/create")
+    @PostMapping("/user/create")
     public ResponseEntity create(@RequestBody AbstractUser abstractUser){
         try {
             AbstractUser result = userService.create(abstractUser);
             return ResponseEntity.status(201).body(result);
         } catch (AbstractException e) {
             return ResponseEntity.status(400).body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/user/{id}/update")
+    public ResponseEntity update(@PathVariable long id , @RequestBody AbstractUser user){
+        try {
+            AbstractUser result = userService.update(id, user);
+            return ResponseEntity.status(200).body(result);
+        }catch (AbstractException e) {
+            return ResponseEntity.status(400).body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/user/{id}/delete")
+    public ResponseEntity delete(@PathVariable long id){
+        try {
+            AbstractUser delete = userService.delete(id);
+            return ResponseEntity.ok(delete);
+        } catch (AbstractException e) {
+            return ResponseEntity.status(404).body(e.getMessage());
         }
     }
 }

@@ -3,6 +3,7 @@ package com.example.usermanagmentserver.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.apache.commons.lang3.StringUtils;
 
 @Getter
 @Setter
@@ -27,4 +28,10 @@ public class AbstractUser {
 
     @Column(nullable = false , unique = true)
     private String email;
+
+    public void update(AbstractUser abstractUser){
+        if (StringUtils.isNotEmpty(abstractUser.getFirstName())) this.firstName = abstractUser.getFirstName();
+        if (StringUtils.isEmpty(abstractUser.getEmail())) this.email = abstractUser.getEmail();
+        if (StringUtils.isNotEmpty(abstractUser.getLastName())) this.lastName = abstractUser.getLastName();
+    }
 }
